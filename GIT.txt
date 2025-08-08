@@ -1,0 +1,41 @@
+GIT:
+
+1. Create an instance in a normal way and connect it with Terminal
+
+2. Create folder
+3. Go inside the folder
+4. Create a file
+5. Install git
+6. Initialize git
+7. Check status
+8. Generate Key
+9. Press enter three times
+10. Go to the previous directory [cd..]
+11. Go to .ssh folder
+12. Open and Read the id_rsa.pub [cat id_rsa.pub]
+
+13. Open GitHub
+14. Go to Settings
+15. Go to SSH and GPG Keys
+16. Give title
+17. Paste Key
+18. Add Key
+19. save and done.
+
+20. Go to Root
+21. Go to the created Folder
+22. Commit the file created
+23. Add remote File [ git remote add origin ]
+
+24. Open a new Repo
+25. Copy SSH Code
+26. Paste it beside the remote File {23}
+27. Go to  the folder
+28. Check branch [git branch]
+29. Push the File [git push origin master]
+30. Check git log [git log]
+
+31. Go to GitHub
+32. Check the Repository created
+33. Click the index.html file
+34. The content of the File is the Answer
