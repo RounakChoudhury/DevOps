@@ -1,0 +1,610 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\10839960\Downloads> ssh -i "jenkey.pem" ec2-user@ec2-44-193-29-186.compute-1.amazonaws.com
+The authenticity of host 'ec2-44-193-29-186.compute-1.amazonaws.com (44.193.29.186)' can't be established.
+ED25519 key fingerprint is SHA256:9dfOZc7OlIrQipxgJTZqSWWSjRJCg3erqODmketAn2E.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-44-193-29-186.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-8-163 ~]$ sudo su -
+[root@ip-172-31-8-163 ~]# hostnamectl set-hostname rima
+[root@ip-172-31-8-163 ~]# bash
+[root@rima ~]# sudo yum update –y
+Amazon Linux 2023 Kernel Livepatch repository                                           174 kB/s |  19 kB     00:00
+No match for argument: –y
+Error: No packages marked for upgrade.
+[root@rima ~]# sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+--2025-08-09 07:32:03--  https://pkg.jenkins.io/redhat-stable/jenkins.repo
+Resolving pkg.jenkins.io (pkg.jenkins.io)... 146.75.34.133, 2a04:4e42:79::645
+Connecting to pkg.jenkins.io (pkg.jenkins.io)|146.75.34.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 85
+Saving to: ‘/etc/yum.repos.d/jenkins.repo’
+
+/etc/yum.repos.d/jenkins.repo 100%[=================================================>]      85  --.-KB/s    in 0s
+
+2025-08-09 07:32:04 (2.93 MB/s) - ‘/etc/yum.repos.d/jenkins.repo’ saved [85/85]
+
+[root@rima ~]# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+[root@rima ~]# sudo yum upgrade
+Jenkins-stable                                                                                       606 kB/s |  32 kB     00:00
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@rima ~]# sudo yum install java-17-amazon-corretto -y
+Last metadata expiration check: 0:00:27 ago on Sat Aug  9 07:33:11 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                                      Architecture       Version                               Repository               Size
+=====================================================================================================================================
+Installing:
+ java-17-amazon-corretto                      x86_64             1:17.0.16+8-1.amzn2023.1              amazonlinux             213 k
+Installing dependencies:
+ alsa-lib                                     x86_64             1.2.7.2-1.amzn2023.0.2                amazonlinux             504 k
+ cairo                                        x86_64             1.18.0-4.amzn2023.0.2                 amazonlinux             717 k
+ dejavu-sans-fonts                            noarch             2.37-16.amzn2023.0.2                  amazonlinux             1.3 M
+ dejavu-sans-mono-fonts                       noarch             2.37-16.amzn2023.0.2                  amazonlinux             467 k
+ dejavu-serif-fonts                           noarch             2.37-16.amzn2023.0.2                  amazonlinux             1.0 M
+ fontconfig                                   x86_64             2.13.94-2.amzn2023.0.2                amazonlinux             273 k
+ fonts-filesystem                             noarch             1:2.0.5-12.amzn2023.0.2               amazonlinux             9.5 k
+ freetype                                     x86_64             2.13.2-5.amzn2023.0.1                 amazonlinux             423 k
+ giflib                                       x86_64             5.2.1-9.amzn2023.0.1                  amazonlinux              49 k
+ google-noto-fonts-common                     noarch             20240401-1.amzn2023.0.2               amazonlinux              17 k
+ google-noto-sans-vf-fonts                    noarch             20240401-1.amzn2023.0.2               amazonlinux             593 k
+ graphite2                                    x86_64             1.3.14-7.amzn2023.0.2                 amazonlinux              97 k
+ harfbuzz                                     x86_64             7.0.0-2.amzn2023.0.2                  amazonlinux             873 k
+ java-17-amazon-corretto-headless             x86_64             1:17.0.16+8-1.amzn2023.1              amazonlinux              91 M
+ javapackages-filesystem                      noarch             6.0.0-7.amzn2023.0.6                  amazonlinux              12 k
+ langpacks-core-font-en                       noarch             3.0-21.amzn2023.0.4                   amazonlinux              10 k
+ libICE                                       x86_64             1.1.1-3.amzn2023.0.1                  amazonlinux              76 k
+ libSM                                        x86_64             1.2.4-3.amzn2023.0.1                  amazonlinux              45 k
+ libX11                                       x86_64             1.8.10-2.amzn2023.0.1                 amazonlinux             659 k
+ libX11-common                                noarch             1.8.10-2.amzn2023.0.1                 amazonlinux             147 k
+ libXau                                       x86_64             1.0.11-6.amzn2023.0.1                 amazonlinux              33 k
+ libXext                                      x86_64             1.3.6-1.amzn2023.0.1                  amazonlinux              42 k
+ libXi                                        x86_64             1.8.2-1.amzn2023.0.1                  amazonlinux              42 k
+ libXinerama                                  x86_64             1.1.5-6.amzn2023.0.1                  amazonlinux              16 k
+ libXrandr                                    x86_64             1.5.4-3.amzn2023.0.1                  amazonlinux              29 k
+ libXrender                                   x86_64             0.9.11-6.amzn2023.0.1                 amazonlinux              29 k
+ libXt                                        x86_64             1.3.0-3.amzn2023.0.1                  amazonlinux             183 k
+ libXtst                                      x86_64             1.2.5-1.amzn2023.0.1                  amazonlinux              22 k
+ libbrotli                                    x86_64             1.0.9-4.amzn2023.0.2                  amazonlinux             315 k
+ libjpeg-turbo                                x86_64             2.1.4-2.amzn2023.0.5                  amazonlinux             190 k
+ libpng                                       x86_64             2:1.6.37-10.amzn2023.0.6              amazonlinux             128 k
+ libxcb                                       x86_64             1.17.0-1.amzn2023.0.1                 amazonlinux             235 k
+ pixman                                       x86_64             0.43.4-1.amzn2023.0.4                 amazonlinux             296 k
+ xml-common                                   noarch             0.6.3-56.amzn2023.0.2                 amazonlinux              32 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  35 Packages
+
+Total download size: 100 M
+Installed size: 262 M
+Downloading Packages:
+(1/35): alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64.rpm                                                   9.7 MB/s | 504 kB     00:00
+(2/35): cairo-1.18.0-4.amzn2023.0.2.x86_64.rpm                                                        12 MB/s | 717 kB     00:00
+(3/35): dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch.rpm                                             18 MB/s | 1.3 MB     00:00
+(4/35): dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch.rpm                                        11 MB/s | 467 kB     00:00
+(5/35): dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch.rpm                                            25 MB/s | 1.0 MB     00:00
+(6/35): fontconfig-2.13.94-2.amzn2023.0.2.x86_64.rpm                                                 7.2 MB/s | 273 kB     00:00
+(7/35): fonts-filesystem-2.0.5-12.amzn2023.0.2.noarch.rpm                                            463 kB/s | 9.5 kB     00:00
+(8/35): freetype-2.13.2-5.amzn2023.0.1.x86_64.rpm                                                     13 MB/s | 423 kB     00:00
+(9/35): giflib-5.2.1-9.amzn2023.0.1.x86_64.rpm                                                       1.8 MB/s |  49 kB     00:00
+(10/35): google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch.rpm                                 640 kB/s |  17 kB     00:00
+(11/35): google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch.rpm                                 22 MB/s | 593 kB     00:00
+(12/35): graphite2-1.3.14-7.amzn2023.0.2.x86_64.rpm                                                  4.2 MB/s |  97 kB     00:00
+(13/35): harfbuzz-7.0.0-2.amzn2023.0.2.x86_64.rpm                                                     26 MB/s | 873 kB     00:00
+(14/35): java-17-amazon-corretto-17.0.16+8-1.amzn2023.1.x86_64.rpm                                   8.7 MB/s | 213 kB     00:00
+(15/35): javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch.rpm                                     488 kB/s |  12 kB     00:00
+(16/35): langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch.rpm                                       409 kB/s |  10 kB     00:00
+(17/35): libICE-1.1.1-3.amzn2023.0.1.x86_64.rpm                                                      2.7 MB/s |  76 kB     00:00
+(18/35): libSM-1.2.4-3.amzn2023.0.1.x86_64.rpm                                                       1.9 MB/s |  45 kB     00:00
+(19/35): libX11-1.8.10-2.amzn2023.0.1.x86_64.rpm                                                      19 MB/s | 659 kB     00:00
+(20/35): libX11-common-1.8.10-2.amzn2023.0.1.noarch.rpm                                              4.5 MB/s | 147 kB     00:00
+(21/35): libXau-1.0.11-6.amzn2023.0.1.x86_64.rpm                                                     1.6 MB/s |  33 kB     00:00
+(22/35): libXext-1.3.6-1.amzn2023.0.1.x86_64.rpm                                                     2.1 MB/s |  42 kB     00:00
+(23/35): libXinerama-1.1.5-6.amzn2023.0.1.x86_64.rpm                                                 875 kB/s |  16 kB     00:00
+(24/35): libXi-1.8.2-1.amzn2023.0.1.x86_64.rpm                                                       1.6 MB/s |  42 kB     00:00
+(25/35): libXrandr-1.5.4-3.amzn2023.0.1.x86_64.rpm                                                   1.3 MB/s |  29 kB     00:00
+(26/35): libXrender-0.9.11-6.amzn2023.0.1.x86_64.rpm                                                 1.3 MB/s |  29 kB     00:00
+(27/35): libXt-1.3.0-3.amzn2023.0.1.x86_64.rpm                                                       7.3 MB/s | 183 kB     00:00
+(28/35): libXtst-1.2.5-1.amzn2023.0.1.x86_64.rpm                                                     907 kB/s |  22 kB     00:00
+(29/35): libbrotli-1.0.9-4.amzn2023.0.2.x86_64.rpm                                                   9.8 MB/s | 315 kB     00:00
+(30/35): libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64.rpm                                               5.5 MB/s | 190 kB     00:00
+(31/35): libpng-1.6.37-10.amzn2023.0.6.x86_64.rpm                                                    4.7 MB/s | 128 kB     00:00
+(32/35): libxcb-1.17.0-1.amzn2023.0.1.x86_64.rpm                                                     8.2 MB/s | 235 kB     00:00
+(33/35): xml-common-0.6.3-56.amzn2023.0.2.noarch.rpm                                                 1.4 MB/s |  32 kB     00:00
+(34/35): pixman-0.43.4-1.amzn2023.0.4.x86_64.rpm                                                     8.6 MB/s | 296 kB     00:00
+(35/35): java-17-amazon-corretto-headless-17.0.16+8-1.amzn2023.1.x86_64.rpm                           66 MB/s |  91 MB     00:01
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 63 MB/s | 100 MB     00:01
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : fonts-filesystem-1:2.0.5-12.amzn2023.0.2.noarch                                                            1/35
+  Installing       : libpng-2:1.6.37-10.amzn2023.0.6.x86_64                                                                     2/35
+  Installing       : dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch                                                         3/35
+  Installing       : dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch                                                              4/35
+  Installing       : libICE-1.1.1-3.amzn2023.0.1.x86_64                                                                         5/35
+  Installing       : libSM-1.2.4-3.amzn2023.0.1.x86_64                                                                          6/35
+  Installing       : dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch                                                             7/35
+  Running scriptlet: xml-common-0.6.3-56.amzn2023.0.2.noarch                                                                    8/35
+  Installing       : xml-common-0.6.3-56.amzn2023.0.2.noarch                                                                    8/35
+  Installing       : pixman-0.43.4-1.amzn2023.0.4.x86_64                                                                        9/35
+  Installing       : libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64                                                                 10/35
+  Installing       : libbrotli-1.0.9-4.amzn2023.0.2.x86_64                                                                     11/35
+  Installing       : libXau-1.0.11-6.amzn2023.0.1.x86_64                                                                       12/35
+  Installing       : libxcb-1.17.0-1.amzn2023.0.1.x86_64                                                                       13/35
+  Installing       : libX11-common-1.8.10-2.amzn2023.0.1.noarch                                                                14/35
+  Installing       : libX11-1.8.10-2.amzn2023.0.1.x86_64                                                                       15/35
+  Installing       : libXext-1.3.6-1.amzn2023.0.1.x86_64                                                                       16/35
+  Installing       : libXrender-0.9.11-6.amzn2023.0.1.x86_64                                                                   17/35
+  Installing       : libXi-1.8.2-1.amzn2023.0.1.x86_64                                                                         18/35
+  Installing       : libXtst-1.2.5-1.amzn2023.0.1.x86_64                                                                       19/35
+  Installing       : libXrandr-1.5.4-3.amzn2023.0.1.x86_64                                                                     20/35
+  Installing       : libXinerama-1.1.5-6.amzn2023.0.1.x86_64                                                                   21/35
+  Installing       : libXt-1.3.0-3.amzn2023.0.1.x86_64                                                                         22/35
+  Installing       : javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch                                                       23/35
+  Installing       : graphite2-1.3.14-7.amzn2023.0.2.x86_64                                                                    24/35
+  Installing       : google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch                                                   25/35
+  Installing       : google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch                                                  26/35
+  Installing       : langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch                                                         27/35
+  Installing       : cairo-1.18.0-4.amzn2023.0.2.x86_64                                                                        28/35
+  Installing       : harfbuzz-7.0.0-2.amzn2023.0.2.x86_64                                                                      29/35
+  Installing       : freetype-2.13.2-5.amzn2023.0.1.x86_64                                                                     30/35
+  Installing       : fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                                  31/35
+  Running scriptlet: fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                                  31/35
+  Installing       : giflib-5.2.1-9.amzn2023.0.1.x86_64                                                                        32/35
+  Installing       : alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64                                                                    33/35
+  Installing       : java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64                                          34/35
+  Running scriptlet: java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64                                          34/35
+  Installing       : java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64                                                   35/35
+  Running scriptlet: fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                                  35/35
+  Running scriptlet: java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64                                                   35/35
+  Verifying        : alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64                                                                     1/35
+  Verifying        : cairo-1.18.0-4.amzn2023.0.2.x86_64                                                                         2/35
+  Verifying        : dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch                                                              3/35
+  Verifying        : dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch                                                         4/35
+  Verifying        : dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch                                                             5/35
+  Verifying        : fontconfig-2.13.94-2.amzn2023.0.2.x86_64                                                                   6/35
+  Verifying        : fonts-filesystem-1:2.0.5-12.amzn2023.0.2.noarch                                                            7/35
+  Verifying        : freetype-2.13.2-5.amzn2023.0.1.x86_64                                                                      8/35
+  Verifying        : giflib-5.2.1-9.amzn2023.0.1.x86_64                                                                         9/35
+  Verifying        : google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch                                                   10/35
+  Verifying        : google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch                                                  11/35
+  Verifying        : graphite2-1.3.14-7.amzn2023.0.2.x86_64                                                                    12/35
+  Verifying        : harfbuzz-7.0.0-2.amzn2023.0.2.x86_64                                                                      13/35
+  Verifying        : java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64                                                   14/35
+  Verifying        : java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64                                          15/35
+  Verifying        : javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch                                                       16/35
+  Verifying        : langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch                                                         17/35
+  Verifying        : libICE-1.1.1-3.amzn2023.0.1.x86_64                                                                        18/35
+  Verifying        : libSM-1.2.4-3.amzn2023.0.1.x86_64                                                                         19/35
+  Verifying        : libX11-1.8.10-2.amzn2023.0.1.x86_64                                                                       20/35
+  Verifying        : libX11-common-1.8.10-2.amzn2023.0.1.noarch                                                                21/35
+  Verifying        : libXau-1.0.11-6.amzn2023.0.1.x86_64                                                                       22/35
+  Verifying        : libXext-1.3.6-1.amzn2023.0.1.x86_64                                                                       23/35
+  Verifying        : libXi-1.8.2-1.amzn2023.0.1.x86_64                                                                         24/35
+  Verifying        : libXinerama-1.1.5-6.amzn2023.0.1.x86_64                                                                   25/35
+  Verifying        : libXrandr-1.5.4-3.amzn2023.0.1.x86_64                                                                     26/35
+  Verifying        : libXrender-0.9.11-6.amzn2023.0.1.x86_64                                                                   27/35
+  Verifying        : libXt-1.3.0-3.amzn2023.0.1.x86_64                                                                         28/35
+  Verifying        : libXtst-1.2.5-1.amzn2023.0.1.x86_64                                                                       29/35
+  Verifying        : libbrotli-1.0.9-4.amzn2023.0.2.x86_64                                                                     30/35
+  Verifying        : libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64                                                                 31/35
+  Verifying        : libpng-2:1.6.37-10.amzn2023.0.6.x86_64                                                                    32/35
+  Verifying        : libxcb-1.17.0-1.amzn2023.0.1.x86_64                                                                       33/35
+  Verifying        : pixman-0.43.4-1.amzn2023.0.4.x86_64                                                                       34/35
+  Verifying        : xml-common-0.6.3-56.amzn2023.0.2.noarch                                                                   35/35
+
+Installed:
+  alsa-lib-1.2.7.2-1.amzn2023.0.2.x86_64                                cairo-1.18.0-4.amzn2023.0.2.x86_64
+  dejavu-sans-fonts-2.37-16.amzn2023.0.2.noarch                         dejavu-sans-mono-fonts-2.37-16.amzn2023.0.2.noarch
+  dejavu-serif-fonts-2.37-16.amzn2023.0.2.noarch                        fontconfig-2.13.94-2.amzn2023.0.2.x86_64
+  fonts-filesystem-1:2.0.5-12.amzn2023.0.2.noarch                       freetype-2.13.2-5.amzn2023.0.1.x86_64
+  giflib-5.2.1-9.amzn2023.0.1.x86_64                                    google-noto-fonts-common-20240401-1.amzn2023.0.2.noarch
+  google-noto-sans-vf-fonts-20240401-1.amzn2023.0.2.noarch              graphite2-1.3.14-7.amzn2023.0.2.x86_64
+  harfbuzz-7.0.0-2.amzn2023.0.2.x86_64                                  java-17-amazon-corretto-1:17.0.16+8-1.amzn2023.1.x86_64
+  java-17-amazon-corretto-headless-1:17.0.16+8-1.amzn2023.1.x86_64      javapackages-filesystem-6.0.0-7.amzn2023.0.6.noarch
+  langpacks-core-font-en-3.0-21.amzn2023.0.4.noarch                     libICE-1.1.1-3.amzn2023.0.1.x86_64
+  libSM-1.2.4-3.amzn2023.0.1.x86_64                                     libX11-1.8.10-2.amzn2023.0.1.x86_64
+  libX11-common-1.8.10-2.amzn2023.0.1.noarch                            libXau-1.0.11-6.amzn2023.0.1.x86_64
+  libXext-1.3.6-1.amzn2023.0.1.x86_64                                   libXi-1.8.2-1.amzn2023.0.1.x86_64
+  libXinerama-1.1.5-6.amzn2023.0.1.x86_64                               libXrandr-1.5.4-3.amzn2023.0.1.x86_64
+  libXrender-0.9.11-6.amzn2023.0.1.x86_64                               libXt-1.3.0-3.amzn2023.0.1.x86_64
+  libXtst-1.2.5-1.amzn2023.0.1.x86_64                                   libbrotli-1.0.9-4.amzn2023.0.2.x86_64
+  libjpeg-turbo-2.1.4-2.amzn2023.0.5.x86_64                             libpng-2:1.6.37-10.amzn2023.0.6.x86_64
+  libxcb-1.17.0-1.amzn2023.0.1.x86_64                                   pixman-0.43.4-1.amzn2023.0.4.x86_64
+  xml-common-0.6.3-56.amzn2023.0.2.noarch
+
+Complete!
+[root@rima ~]# sudo yum install jenkins -y
+\\Last metadata expiration check: 0:01:08 ago on Sat Aug  9 07:33:11 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                       Architecture                 Version                              Repository                     Size
+=====================================================================================================================================
+Installing:
+ jenkins                       noarch                       2.516.1-1.1                          jenkins                        83 M
+
+Transaction Summary
+=====================================================================================================================================
+Install  1 Package
+
+Total download size: 83 M
+Installed size: 83 M
+Downloading Packages:
+jenkins-2.516.1-1.1.noarch.rpm                                                                       3.7 MB/s |  83 MB     00:22
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                3.7 MB/s |  83 MB     00:22
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Running scriptlet: jenkins-2.516.1-1.1.noarch                                                                                  1/1
+  Installing       : jenkins-2.516.1-1.1.noarch                                                                                  1/1
+  Running scriptlet: jenkins-2.516.1-1.1.noarch                                                                                  1/1
+  Verifying        : jenkins-2.516.1-1.1.noarch                                                                                  1/1
+
+Installed:
+  jenkins-2.516.1-1.1.noarch
+
+Complete!
+[root@rima ~]# sudo systemctl enable jenkins
+Created symlink /etc/systemd/system/multi-user.target.wants/jenkins.service → /usr/lib/systemd/system/jenkins.service.
+[root@rima ~]# sudo systemctl start jenkins
+[root@rima ~]# sudo systemctl status jenkins
+● jenkins.service - Jenkins Continuous Integration Server
+     Loaded: loaded (/usr/lib/systemd/system/jenkins.service; enabled; preset: disabled)
+     Active: active (running) since Sat 2025-08-09 07:35:44 UTC; 5s ago
+   Main PID: 26374 (java)
+      Tasks: 46 (limit: 1111)
+     Memory: 352.9M
+        CPU: 17.359s
+     CGroup: /system.slice/jenkins.service
+             └─26374 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkins/war --http>
+
+Aug 09 07:35:37 rima jenkins[26374]: This may also be found at: /var/lib/jenkins/secrets/initialAdminPassword
+Aug 09 07:35:37 rima jenkins[26374]: *************************************************************
+Aug 09 07:35:37 rima jenkins[26374]: *************************************************************
+Aug 09 07:35:37 rima jenkins[26374]: *************************************************************
+Aug 09 07:35:44 rima jenkins[26374]: 2025-08-09 07:35:44.837+0000 [id=31]        INFO        jenkins.InitReactorRunner$1#onAttained:>
+Aug 09 07:35:44 rima jenkins[26374]: 2025-08-09 07:35:44.866+0000 [id=23]        INFO        hudson.lifecycle.Lifecycle#onReady: Jen>
+Aug 09 07:35:44 rima systemd[1]: Started jenkins.service - Jenkins Continuous Integration Server.
+Aug 09 07:35:45 rima jenkins[26374]: 2025-08-09 07:35:45.076+0000 [id=46]        INFO        h.m.DownloadService$Downloadable#load: >
+Aug 09 07:35:45 rima jenkins[26374]: 2025-08-09 07:35:45.077+0000 [id=46]        INFO        hudson.util.Retrier#start: Performed th>
+Aug 09 07:35:49 rima jenkins[26374]: 2025-08-09 07:35:49.965+0000 [id=68]        WARNING        h.n.DiskSpaceMonitorDescriptor#markN>
+lines 1-20/20 (END)
+[root@rima ~]# sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+0a3cca24bff947e5a46548a3d5b74256
+[root@rima ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  440K  190M   1% /run
+/dev/xvda1       20G  2.3G   18G  12% /
+tmpfs           475M  4.5M  471M   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@rima ~]# vim /etc/fstab
+[root@rima ~]#     sudo mount -o remount,size=XG /tmp
+mount: /tmp: mount point not mounted or bad option.
+[root@rima ~]#     sudo mount -o remount,size=5g /tmp
+[root@rima ~]# vim /etc/fstab
+[root@rima ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  440K  190M   1% /run
+/dev/xvda1       20G  2.3G   18G  12% /
+tmpfs           5.0G  4.5M  5.0G   1% /tmp
+/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@rima ~]#
+Broadcast message from root@localhost (Sat 2025-08-09 08:34:55 UTC):
+
+The system will reboot now!
+
+
+Broadcast message from root@localhost (Sat 2025-08-09 08:34:55 UTC):
+
+The system will reboot now!
+
+Connection to ec2-44-193-29-186.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-44-193-29-186.compute-1.amazonaws.com closed.
+PS C:\Users\10839960\Downloads> ssh -i "jenkey.pem" ec2-user@ec2-44-193-29-186.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Sat Aug  9 07:29:50 2025 from 103.244.155.144
+[ec2-user@rima ~]$ sudo su -
+Last login: Sat Aug  9 07:30:00 UTC 2025 on pts/1
+[root@rima ~]# yum install git -y
+Last metadata expiration check: 1:05:14 ago on Sat Aug  9 07:33:11 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                          Architecture           Version                                   Repository                   Size
+=====================================================================================================================================
+Installing:
+ git                              x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                  53 k
+Installing dependencies:
+ git-core                         x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                 4.9 M
+ git-core-doc                     noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                 2.8 M
+ perl-Error                       noarch                 1:0.17029-5.amzn2023.0.2                  amazonlinux                  41 k
+ perl-File-Find                   noarch                 1.37-477.amzn2023.0.7                     amazonlinux                  25 k
+ perl-Git                         noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                  41 k
+ perl-TermReadKey                 x86_64                 2.38-9.amzn2023.0.2                       amazonlinux                  36 k
+ perl-lib                         x86_64                 0.65-477.amzn2023.0.7                     amazonlinux                  15 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                          1.4 MB/s |  53 kB     00:00
+(2/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                                  1.9 MB/s |  41 kB     00:00
+(3/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                               1.2 MB/s |  25 kB     00:00
+(4/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                                  27 MB/s | 2.8 MB     00:00
+(5/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                      36 MB/s | 4.9 MB     00:00
+(6/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                                     691 kB/s |  41 kB     00:00
+(7/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                               1.0 MB/s |  36 kB     00:00
+(8/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                                     696 kB/s |  15 kB     00:00
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 40 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64            git-core-2.50.1-1.amzn2023.0.1.x86_64       git-core-doc-2.50.1-1.amzn2023.0.1.noarch
+  perl-Error-1:0.17029-5.amzn2023.0.2.noarch  perl-File-Find-1.37-477.amzn2023.0.7.noarch perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@rima ~]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /root/.git/
+[root@rima ~]# yum install maven
+Last metadata expiration check: 1:14:52 ago on Sat Aug  9 07:33:11 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                                           Architecture     Version                              Repository             Size
+=====================================================================================================================================
+Installing:
+ maven                                             noarch           1:3.8.4-3.amzn2023.0.5               amazonlinux            18 k
+Installing dependencies:
+ apache-commons-cli                                noarch           1.5.0-3.amzn2023.0.3                 amazonlinux            76 k
+ apache-commons-codec                              noarch           1.15-6.amzn2023.0.3                  amazonlinux           303 k
+ apache-commons-io                                 noarch           1:2.8.0-7.amzn2023.0.5               amazonlinux           283 k
+ apache-commons-lang3                              noarch           3.12.0-7.amzn2023.0.3                amazonlinux           559 k
+ atinject                                          noarch           1.0.5-3.amzn2023.0.3                 amazonlinux            23 k
+ cdi-api                                           noarch           2.0.2-6.amzn2023.0.3                 amazonlinux            54 k
+ google-guice                                      noarch           4.2.3-8.amzn2023.0.6                 amazonlinux           473 k
+ guava                                             noarch           31.0.1-3.amzn2023.0.6                amazonlinux           2.4 M
+ httpcomponents-client                             noarch           4.5.13-4.amzn2023.0.4                amazonlinux           657 k
+ httpcomponents-core                               noarch           4.4.13-6.amzn2023.0.3                amazonlinux           632 k
+ jakarta-annotations                               noarch           1.3.5-13.amzn2023.0.3                amazonlinux            46 k
+ jansi                                             x86_64           2.4.0-3.amzn2023.0.3                 amazonlinux           113 k
+ java-17-amazon-corretto-devel                     x86_64           1:17.0.16+8-1.amzn2023.1             amazonlinux           142 k
+ jcl-over-slf4j                                    noarch           1.7.32-3.amzn2023.0.4                amazonlinux            25 k
+ jsoup                                             noarch           1.16.1-4.amzn2023.0.2                amazonlinux           433 k
+ jsr-305                                           noarch           3.0.2-5.amzn2023.0.4                 amazonlinux            32 k
+ maven-amazon-corretto17                           noarch           1:3.8.4-3.amzn2023.0.5               amazonlinux           9.4 k
+ maven-lib                                         noarch           1:3.8.4-3.amzn2023.0.5               amazonlinux           1.5 M
+ maven-resolver                                    noarch           1:1.7.3-3.amzn2023.0.4               amazonlinux           557 k
+ maven-shared-utils                                noarch           3.3.4-4.amzn2023.0.3                 amazonlinux           152 k
+ maven-wagon                                       noarch           3.4.2-6.amzn2023.0.4                 amazonlinux           113 k
+ plexus-cipher                                     noarch           1.8-3.amzn2023.0.3                   amazonlinux            27 k
+ plexus-classworlds                                noarch           2.6.0-10.amzn2023.0.4                amazonlinux            61 k
+ plexus-containers-component-annotations           noarch           2.1.0-9.amzn2023.0.4                 amazonlinux            19 k
+ plexus-interpolation                              noarch           1.26-10.amzn2023.0.4                 amazonlinux            80 k
+ plexus-sec-dispatcher                             noarch           2.0-3.amzn2023.0.3                   amazonlinux            34 k
+ plexus-utils                                      noarch           3.3.0-9.amzn2023.0.4                 amazonlinux           254 k
+ publicsuffix-list                                 noarch           20240212-61.amzn2023                 amazonlinux            89 k
+ sisu                                              noarch           1:0.3.4-9.amzn2023.0.4               amazonlinux           510 k
+ slf4j                                             noarch           1.7.32-3.amzn2023.0.4                amazonlinux            70 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  31 Packages
+
+Total download size: 9.6 M
+Installed size: 13 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/31): apache-commons-cli-1.5.0-3.amzn2023.0.3.noarch.rpm                                           1.2 MB/s |  76 kB     00:00
+(2/31): apache-commons-io-2.8.0-7.amzn2023.0.5.noarch.rpm                                            4.1 MB/s | 283 kB     00:00
+(3/31): apache-commons-codec-1.15-6.amzn2023.0.3.noarch.rpm                                          3.6 MB/s | 303 kB     00:00
+(4/31): atinject-1.0.5-3.amzn2023.0.3.noarch.rpm                                                     1.2 MB/s |  23 kB     00:00
+(5/31): cdi-api-2.0.2-6.amzn2023.0.3.noarch.rpm                                                      2.3 MB/s |  54 kB     00:00
+(6/31): apache-commons-lang3-3.12.0-7.amzn2023.0.3.noarch.rpm                                         11 MB/s | 559 kB     00:00
+(7/31): guava-31.0.1-3.amzn2023.0.6.noarch.rpm                                                        32 MB/s | 2.4 MB     00:00
+(8/31): google-guice-4.2.3-8.amzn2023.0.6.noarch.rpm                                                 4.1 MB/s | 473 kB     00:00
+(9/31): jakarta-annotations-1.3.5-13.amzn2023.0.3.noarch.rpm                                         2.0 MB/s |  46 kB     00:00
+(10/31): httpcomponents-client-4.5.13-4.amzn2023.0.4.noarch.rpm                                      5.5 MB/s | 657 kB     00:00
+(11/31): httpcomponents-core-4.4.13-6.amzn2023.0.3.noarch.rpm                                         11 MB/s | 632 kB     00:00
+(12/31): jcl-over-slf4j-1.7.32-3.amzn2023.0.4.noarch.rpm                                             1.3 MB/s |  25 kB     00:00
+(13/31): java-17-amazon-corretto-devel-17.0.16+8-1.amzn2023.1.x86_64.rpm                             3.1 MB/s | 142 kB     00:00
+(14/31): jansi-2.4.0-3.amzn2023.0.3.x86_64.rpm                                                       1.5 MB/s | 113 kB     00:00
+(15/31): maven-3.8.4-3.amzn2023.0.5.noarch.rpm                                                       543 kB/s |  18 kB     00:00
+(16/31): jsoup-1.16.1-4.amzn2023.0.2.noarch.rpm                                                      5.4 MB/s | 433 kB     00:00
+(17/31): maven-amazon-corretto17-3.8.4-3.amzn2023.0.5.noarch.rpm                                     498 kB/s | 9.4 kB     00:00
+(18/31): jsr-305-3.0.2-5.amzn2023.0.4.noarch.rpm                                                     402 kB/s |  32 kB     00:00
+(19/31): maven-lib-3.8.4-3.amzn2023.0.5.noarch.rpm                                                    25 MB/s | 1.5 MB     00:00
+(20/31): maven-shared-utils-3.3.4-4.amzn2023.0.3.noarch.rpm                                          2.2 MB/s | 152 kB     00:00
+(21/31): maven-resolver-1.7.3-3.amzn2023.0.4.noarch.rpm                                              6.9 MB/s | 557 kB     00:00
+(22/31): plexus-cipher-1.8-3.amzn2023.0.3.noarch.rpm                                                 1.3 MB/s |  27 kB     00:00
+(23/31): plexus-classworlds-2.6.0-10.amzn2023.0.4.noarch.rpm                                         2.2 MB/s |  61 kB     00:00
+(24/31): maven-wagon-3.4.2-6.amzn2023.0.4.noarch.rpm                                                 1.7 MB/s | 113 kB     00:00
+(25/31): plexus-containers-component-annotations-2.1.0-9.amzn2023.0.4.noarch.rpm                     888 kB/s |  19 kB     00:00
+(26/31): plexus-sec-dispatcher-2.0-3.amzn2023.0.3.noarch.rpm                                         1.0 MB/s |  34 kB     00:00
+(27/31): plexus-utils-3.3.0-9.amzn2023.0.4.noarch.rpm                                                4.4 MB/s | 254 kB     00:00
+(28/31): plexus-interpolation-1.26-10.amzn2023.0.4.noarch.rpm                                        1.0 MB/s |  80 kB     00:00
+(29/31): publicsuffix-list-20240212-61.amzn2023.noarch.rpm                                           2.0 MB/s |  89 kB     00:00
+(30/31): slf4j-1.7.32-3.amzn2023.0.4.noarch.rpm                                                      2.5 MB/s |  70 kB     00:00
+(31/31): sisu-0.3.4-9.amzn2023.0.4.noarch.rpm                                                        5.8 MB/s | 510 kB     00:00
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 15 MB/s | 9.6 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : slf4j-1.7.32-3.amzn2023.0.4.noarch                                                                         1/31
+  Installing       : plexus-utils-3.3.0-9.amzn2023.0.4.noarch                                                                   2/31
+  Installing       : atinject-1.0.5-3.amzn2023.0.3.noarch                                                                       3/31
+  Installing       : plexus-containers-component-annotations-2.1.0-9.amzn2023.0.4.noarch                                        4/31
+  Installing       : plexus-classworlds-2.6.0-10.amzn2023.0.4.noarch                                                            5/31
+  Installing       : plexus-cipher-1.8-3.amzn2023.0.3.noarch                                                                    6/31
+  Installing       : jakarta-annotations-1.3.5-13.amzn2023.0.3.noarch                                                           7/31
+  Installing       : httpcomponents-core-4.4.13-6.amzn2023.0.3.noarch                                                           8/31
+  Installing       : apache-commons-lang3-3.12.0-7.amzn2023.0.3.noarch                                                          9/31
+  Installing       : apache-commons-io-1:2.8.0-7.amzn2023.0.5.noarch                                                           10/31
+  Installing       : maven-shared-utils-3.3.4-4.amzn2023.0.3.noarch                                                            11/31
+  Installing       : plexus-sec-dispatcher-2.0-3.amzn2023.0.3.noarch                                                           12/31
+  Installing       : cdi-api-2.0.2-6.amzn2023.0.3.noarch                                                                       13/31
+  Installing       : sisu-1:0.3.4-9.amzn2023.0.4.noarch                                                                        14/31
+  Installing       : jcl-over-slf4j-1.7.32-3.amzn2023.0.4.noarch                                                               15/31
+  Installing       : publicsuffix-list-20240212-61.amzn2023.noarch                                                             16/31
+  Installing       : plexus-interpolation-1.26-10.amzn2023.0.4.noarch                                                          17/31
+  Installing       : jsr-305-3.0.2-5.amzn2023.0.4.noarch                                                                       18/31
+  Installing       : guava-31.0.1-3.amzn2023.0.6.noarch                                                                        19/31
+  Installing       : google-guice-4.2.3-8.amzn2023.0.6.noarch                                                                  20/31
+  Installing       : jsoup-1.16.1-4.amzn2023.0.2.noarch                                                                        21/31
+  Installing       : java-17-amazon-corretto-devel-1:17.0.16+8-1.amzn2023.1.x86_64                                             22/31
+  Running scriptlet: java-17-amazon-corretto-devel-1:17.0.16+8-1.amzn2023.1.x86_64                                             22/31
+  Installing       : jansi-2.4.0-3.amzn2023.0.3.x86_64                                                                         23/31
+  Installing       : apache-commons-codec-1.15-6.amzn2023.0.3.noarch                                                           24/31
+  Installing       : httpcomponents-client-4.5.13-4.amzn2023.0.4.noarch                                                        25/31
+  Installing       : maven-wagon-3.4.2-6.amzn2023.0.4.noarch                                                                   26/31
+  Installing       : maven-resolver-1:1.7.3-3.amzn2023.0.4.noarch                                                              27/31
+  Installing       : apache-commons-cli-1.5.0-3.amzn2023.0.3.noarch                                                            28/31
+  Installing       : maven-lib-1:3.8.4-3.amzn2023.0.5.noarch                                                                   29/31
+  Installing       : maven-amazon-corretto17-1:3.8.4-3.amzn2023.0.5.noarch                                                     30/31
+  Installing       : maven-1:3.8.4-3.amzn2023.0.5.noarch                                                                       31/31
+  Running scriptlet: maven-1:3.8.4-3.amzn2023.0.5.noarch                                                                       31/31
+  Verifying        : apache-commons-cli-1.5.0-3.amzn2023.0.3.noarch                                                             1/31
+  Verifying        : apache-commons-codec-1.15-6.amzn2023.0.3.noarch                                                            2/31
+  Verifying        : apache-commons-io-1:2.8.0-7.amzn2023.0.5.noarch                                                            3/31
+  Verifying        : apache-commons-lang3-3.12.0-7.amzn2023.0.3.noarch                                                          4/31
+  Verifying        : atinject-1.0.5-3.amzn2023.0.3.noarch                                                                       5/31
+  Verifying        : cdi-api-2.0.2-6.amzn2023.0.3.noarch                                                                        6/31
+  Verifying        : google-guice-4.2.3-8.amzn2023.0.6.noarch                                                                   7/31
+  Verifying        : guava-31.0.1-3.amzn2023.0.6.noarch                                                                         8/31
+  Verifying        : httpcomponents-client-4.5.13-4.amzn2023.0.4.noarch                                                         9/31
+  Verifying        : httpcomponents-core-4.4.13-6.amzn2023.0.3.noarch                                                          10/31
+  Verifying        : jakarta-annotations-1.3.5-13.amzn2023.0.3.noarch                                                          11/31
+  Verifying        : jansi-2.4.0-3.amzn2023.0.3.x86_64                                                                         12/31
+  Verifying        : java-17-amazon-corretto-devel-1:17.0.16+8-1.amzn2023.1.x86_64                                             13/31
+  Verifying        : jcl-over-slf4j-1.7.32-3.amzn2023.0.4.noarch                                                               14/31
+  Verifying        : jsoup-1.16.1-4.amzn2023.0.2.noarch                                                                        15/31
+  Verifying        : jsr-305-3.0.2-5.amzn2023.0.4.noarch                                                                       16/31
+  Verifying        : maven-1:3.8.4-3.amzn2023.0.5.noarch                                                                       17/31
+  Verifying        : maven-amazon-corretto17-1:3.8.4-3.amzn2023.0.5.noarch                                                     18/31
+  Verifying        : maven-lib-1:3.8.4-3.amzn2023.0.5.noarch                                                                   19/31
+  Verifying        : maven-resolver-1:1.7.3-3.amzn2023.0.4.noarch                                                              20/31
+  Verifying        : maven-shared-utils-3.3.4-4.amzn2023.0.3.noarch                                                            21/31
+  Verifying        : maven-wagon-3.4.2-6.amzn2023.0.4.noarch                                                                   22/31
+  Verifying        : plexus-cipher-1.8-3.amzn2023.0.3.noarch                                                                   23/31
+  Verifying        : plexus-classworlds-2.6.0-10.amzn2023.0.4.noarch                                                           24/31
+  Verifying        : plexus-containers-component-annotations-2.1.0-9.amzn2023.0.4.noarch                                       25/31
+  Verifying        : plexus-interpolation-1.26-10.amzn2023.0.4.noarch                                                          26/31
+  Verifying        : plexus-sec-dispatcher-2.0-3.amzn2023.0.3.noarch                                                           27/31
+  Verifying        : plexus-utils-3.3.0-9.amzn2023.0.4.noarch                                                                  28/31
+  Verifying        : publicsuffix-list-20240212-61.amzn2023.noarch                                                             29/31
+  Verifying        : sisu-1:0.3.4-9.amzn2023.0.4.noarch                                                                        30/31
+  Verifying        : slf4j-1.7.32-3.amzn2023.0.4.noarch                                                                        31/31
+
+Installed:
+  apache-commons-cli-1.5.0-3.amzn2023.0.3.noarch                           apache-commons-codec-1.15-6.amzn2023.0.3.noarch
+  apache-commons-io-1:2.8.0-7.amzn2023.0.5.noarch                          apache-commons-lang3-3.12.0-7.amzn2023.0.3.noarch
+  atinject-1.0.5-3.amzn2023.0.3.noarch                                     cdi-api-2.0.2-6.amzn2023.0.3.noarch
+  google-guice-4.2.3-8.amzn2023.0.6.noarch                                 guava-31.0.1-3.amzn2023.0.6.noarch
+  httpcomponents-client-4.5.13-4.amzn2023.0.4.noarch                       httpcomponents-core-4.4.13-6.amzn2023.0.3.noarch
+  jakarta-annotations-1.3.5-13.amzn2023.0.3.noarch                         jansi-2.4.0-3.amzn2023.0.3.x86_64
+  java-17-amazon-corretto-devel-1:17.0.16+8-1.amzn2023.1.x86_64            jcl-over-slf4j-1.7.32-3.amzn2023.0.4.noarch
+  jsoup-1.16.1-4.amzn2023.0.2.noarch                                       jsr-305-3.0.2-5.amzn2023.0.4.noarch
+  maven-1:3.8.4-3.amzn2023.0.5.noarch                                      maven-amazon-corretto17-1:3.8.4-3.amzn2023.0.5.noarch
+  maven-lib-1:3.8.4-3.amzn2023.0.5.noarch                                  maven-resolver-1:1.7.3-3.amzn2023.0.4.noarch
+  maven-shared-utils-3.3.4-4.amzn2023.0.3.noarch                           maven-wagon-3.4.2-6.amzn2023.0.4.noarch
+  plexus-cipher-1.8-3.amzn2023.0.3.noarch                                  plexus-classworlds-2.6.0-10.amzn2023.0.4.noarch
+  plexus-containers-component-annotations-2.1.0-9.amzn2023.0.4.noarch      plexus-interpolation-1.26-10.amzn2023.0.4.noarch
+  plexus-sec-dispatcher-2.0-3.amzn2023.0.3.noarch                          plexus-utils-3.3.0-9.amzn2023.0.4.noarch
+  publicsuffix-list-20240212-61.amzn2023.noarch                            sisu-1:0.3.4-9.amzn2023.0.4.noarch
+  slf4j-1.7.32-3.amzn2023.0.4.noarch
+
+Complete!
+[root@rima ~]# mvn -v
+Apache Maven 3.8.4 (Red Hat 3.8.4-3.amzn2023.0.5)
+Maven home: /usr/share/maven
+Java version: 17.0.16, vendor: Amazon.com Inc., runtime: /usr/lib/jvm/java-17-amazon-corretto.x86_64
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "6.1.147-172.266.amzn2023.x86_64", arch: "amd64", family: "unix"
+[root@rima ~]# git remote add origin git@github.com:RounakChoudhury/NewRepo.git
+[root@rima ~]# git remote -v
+origin  git@github.com:RounakChoudhury/NewRepo.git (fetch)
+origin  git@github.com:RounakChoudhury/NewRepo.git (push)
+[root@rima ~]# cat > index.html
+asdfghjkjsdfyhujikjuhygtrfdfghjkjhgfghjkjhgf
+[root@rima ~]#
