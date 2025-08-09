@@ -38,4 +38,9 @@ GIT:
 31. Go to GitHub
 32. Check the Repository created
 33. Click the index.html file
+
 34. The content of the File is the Answer
+
+mount -o remount,size=3G /tmp
+
+tmpfs /tmp tmpfs defaults,size=3G,mode=1777 0 0
