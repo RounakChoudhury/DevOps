@@ -1,0 +1,46 @@
+i have one web server in mumbai region where my website is running. i need some server in singapore region. migrate this web server from mumbai to singapore.
+
+AMI
+
+create an instance
+gpe and 8gb
+create a new key
+connect in terminal
+
+goto ec2
+select the instance
+click actions
+click on create image
+give name
+click create image
+reload till appear available
+select the ami created
+click on actions
+copy ami
+only chane the region if stated in question otherwise keep it same
+check the box of copy tags
+Ccick on copy ami
+
+duplicate the session
+change the blue region beside account name to Ohio or as stated
+select the ami
+launch an instance
+different key
+8gb gp2
+launch instance from ami
+create new key
+8gb gp2
+launch instance
+
+click on instance id
+
+goto terminal
+connect the instance created
+when connecting the ohio server, in the ssh key line copied from the ssh client section of ec2 for connecting purpose; cross the word root and write ec2-user 
+... this will be written in the terminal itself
+
+in the ohio terminal,
+cd /data
+cat rnk.html
+
+file is accessed, this is the answer
