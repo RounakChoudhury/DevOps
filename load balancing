@@ -1,0 +1,66 @@
+create 3 instances with the same key and same secuirity group asnd sane region
+but different zones : 1a, 1b, 1c
+
+connect the 3 instances in the terminal
+run the following command in all the terminals
+
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+systemctl status httpd
+cd /var/wwww/html
+cat > rnk.html (name different in different terminal... rnk1 , rnk2)
+write anyting in the file to differentite between them
+ctrl c
+
+goto the instance
+goto secuirity group
+add inbound rule
+HTTP
+
+goto ec2
+select node 1
+copy ipv4
+paste it in address bar followed by port no 80
+if dosent work .... write the name of the html file along with extension at the end in between /
+
+goto ec2
+goto load balancer
+create load balance
+choose application load balance
+give name
+internet facing
+ipv4
+choose availibility zones
+choose the same secuirity group
+create target group
+give name
+choose the instances
+ipv4
+HTTP
+next
+select all
+create target group
+continue
+select all
+register targer
+include as pending below
+select
+preference
+25 resources
+confirm
+regester targets
+create load balance
+refresh to show active status
+select the load balance
+slide
+copy dns
+paste it in address bar
+resfresh to see the results
+
+stop ant one of the server for bad gateway
+
+goto terminal
+syatemctl stop httpd
+
+goto health settings in load balance and take ass
