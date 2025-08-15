@@ -1,0 +1,50 @@
+create three instances in different servers: amazon linux, redhat and ubuntu
+
+connect in terminal 
+
+aws linux:
+sudo su -
+rpmquerry nfs-utils
+systemctl start nfs-server.service
+systemctl status nfs-server.service
+
+redhat:
+sudo su -
+yum install nfs-utils -y
+systemctl start nfs-utils.service
+systemctl status nfs-utils.service
+
+ubuntu
+sudo su -
+apt update
+apt install nfs-common
+systemctl start nfs-utils.service
+systemctl status nfs.service
+
+goto aws
+search efs
+create file system
+give name
+vpc
+default
+create
+
+select the file system
+view details
+network
+manage
+which ever zones instsnces we created
+add secuirity group in thar region
+secuirity group must have nfs port 2049 enabled
+
+click on attach
+select mount via dns
+copy link under using the nfs client
+mkdir /dirname
+paste the link in all the terminals
+at the end of the ink where efs is written : replace it with /dirname
+
+in one vm
+inside the dirname, make a file
+go to the other vms
+cd/dirname - check if that file is present
