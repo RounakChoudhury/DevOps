@@ -1,0 +1,48 @@
+create an instance
+
+after creation
+goto volume
+create volume
+volume type = gp2
+size=5
+create volume
+
+give name to the created volume
+select the volume
+goto action
+attach volume
+
+connect the initial instance
+mkdir /data
+cd /data
+
+goto ec2
+click on volume created
+select instance created
+attach volume
+
+df-h
+mount /dev/<name>...................WHAT NAME???
+mount /dev/<name> /<filename>
+mount /dev/<name>
+
+select the attached volume
+click on actions
+create snapshot
+in the first page do nothing just click create snapshot
+select the created snapshot
+click on it
+click on actions
+click on create volume from snapshot
+give size=5
+gp2
+availability select north virginia 1a
+create volume
+
+duplicate the session
+goto ohio; change the region setting from north virginia
+
+.................
+
+select volume 
+click on action
