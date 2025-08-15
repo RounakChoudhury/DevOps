@@ -1,0 +1,88 @@
+create instance
+size=20
+gp2
+connect in terminal
+
+goto secuirity groups
+edit inbound rules
+add rules
+custom TCP
+8080 port
+
+yum install git -y
+git init
+
+google Jenkins on AWS
+Copy all the codes and paste it in the terminal one by one
+
+after the 7th statement, ctrl C
+copy the ipv4 address from aws
+paste it in address bar of browser with port number 8080
+copy the next code from the website and paste it in terminal
+copy the code
+oaste it in jernkins
+sign in
+install sggested plugins 
+sign in
+
+goto terminal
+df -h
+sudo mount -o remount,size=3G /tmp
+df -h
+vim /etc/fstab
+i
+tmpfs /tmp tmpfs defaults,noatime,mode=1777,size=3G 0 0
+esc : w q ! enter
+df -h
+systemctl daemon-reload
+
+goto aws
+reboot instance
+copy ipv4 and paste it with port number
+sign in
+
+open github
+create a new repo
+enter the repo
+goto settings
+click on webhooks
+click on add webhooks
+
+goto jenkins
+copy ip address and port no
+paste it in the payload url section followed by : /github-webhooks/
+content type = application json
+goto jenkins
+click on profile icon
+click on secuirity
+click on add new token
+give a token name
+click generate
+copy the code
+goto github -> webhooks
+paste it in the secret section
+click add webhook
+goto jenkins
+click apply and save
+refresh github page
+connection is done
+
+goto jenkins
+click on jenkins
+give a name
+select freestyle project
+click ok
+goto source code management
+select git
+goto connected repo
+under code<>
+copy HTTPS link
+paste it in repo URL in Jenkins
+check te branch type from github and change it if required in Jenkins
+click apply and save
+click on build now
+
+click on the build at the bottom of the page
+click on build now arrow
+click on console output
+scroll down to see SUCCESS
