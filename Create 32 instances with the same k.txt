@@ -1,0 +1,54 @@
+Create 3/2 instances with the same key and security group and region
+Zones are different : 1a, 1b, 1c
+8gb and gp2
+
+Connect the 3/2 instances in terminal
+In all the 3/2 terminals run the following commands:
+
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+systemctl status httpd
+cd /var/www/html/
+cat rnk1.html (in different terminal different name: rnk1, rnk2...)
+(Write anything inside the file that denotes that they are all different files)
+Control c to exit the files
+
+Goto Instances
+Secuirity Groups
+Inbound rules
+Add rules
+Port = 80
+HTTP
+
+Go back to instances
+Select the first instance
+Copy IPV4 address
+Paste it in Edge Browser address bar followed by ":80"
+(In case the above doesn't work : Wreite the name of the html file along with extension followed by a /)
+
+Do the above process for all the 3 terminals
+
+Goto EC2
+Goto Load Balancer
+Create Load Balance
+Choose Application Load Balance
+Give a name
+Internet facing
+IPV4
+Choose all the availability zones
+Choose the same security group
+Create target group
+Give name
+Choose the instances
+IPV4
+HTTP
+Click next
+Select all
+Create target group
+Click continue
+Select all
+Register target
+Include as pending below
+
+lb7

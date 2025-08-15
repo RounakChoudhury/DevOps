@@ -1,0 +1,67 @@
+Create an instance
+gp2 and 8gb
+Connect in terminal
+
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+
+Goto EC2
+Click on Volume
+Click on create Volume
+Give Volume type as GP2
+Give size=5
+Select availability zone as 1a
+Create Volume
+Give name to the created volume
+Select the created volume
+Click on Actions
+Click on attach Volume
+Select the Instance created (identifying by its name)
+Give Device name = /dev/sdb
+Attach volume
+
+
+Goto terminal
+lsblk
+(Under NAME copy the first name... would look something like "xdva1 or xdva'n')
+blkid
+fdisk -l
+mkfs.ext4 /dev/<paste the name copied>
+mkdir /data
+mount /dev/<paste the name copied> /data
+cd /data
+touch training.txt{1..10}
+ll
+
+ebs attach vol
+
+
+
+
+
+ 1  yyum install httpd -y
+    2  yum install httpd -y
+    3  systemctl start httpd
+    4  systemctl enable httpd
+    5  lsblk
+    6  blkid
+    7  fdisk -l
+    8  mkfs.ext4 /dev/xvda
+    9  mkdir /data
+   10  mount /dev/xvda
+   11  blkid
+   12  lsblk
+   13  mkfs.ext4 /dev/xvdb
+   14  mount /dev/xvdb /data
+   15  cd /data
+   16  cd
+   17  df -h
+   18  cd /data
+   19  touch rnk.txt{1..10}
+   20  ll
+   21  fdisk -l
+   22  history
+   23  fdisk -l
+   24  history
+

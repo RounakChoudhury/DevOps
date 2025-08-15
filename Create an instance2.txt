@@ -1,0 +1,45 @@
+Create an instance
+gp2 and 8gb
+Connect in Terminal
+
+Select created instance
+Click on created instance
+Click actions
+Create image
+Give image name
+Give image Description
+Keep everything else as it is
+Select create image
+
+Goto AWS
+Under Images
+Click AMIs
+Select the created AMIs
+Click on Actions
+Select copy AMI
+Change Destination region To Ohio
+
+Duplicate session in the browser
+Click on EC2
+Click on Region (beside account name)
+Change it to Ohio
+
+Launch a new instance in Ohio
+gp2 and 8gb
+Connect the new instance of the new region in a new terminal
+
+Both the region should be connected in different terminal
+do hostnamectl to give different name to both the instances to differentiate them.
+
+SAME KEY FOR DIFFERENT REGION INSTANCES????
+
+In both the terminals execute the following commands:
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+cd /var/www/html
+cat > index.html
+(write anything in the file)
+Control C to exit the file
+
+Ami3

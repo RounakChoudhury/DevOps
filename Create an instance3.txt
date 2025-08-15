@@ -1,0 +1,101 @@
+Create an instance
+size = 20gb
+gp2
+Connect in terminal
+After Successful creation goto Secuirity Groups
+Add inbound rules
+Custom TCP
+Port = 8080
+
+yum install git -y
+git init
+
+Google "AWS on Jenkins"
+Paste on code after the other
+
+Goto Instances
+copy IPV4 address
+Paste it in address bar along with port number
+Jenkins password page appears
+
+Copy the next code from "AWS on Jenkins"
+Paste it in terminal
+Copy the password 
+Paste it in Jenkins
+Install suggested plugins
+
+Sign in 
+Give username and password
+Click continue
+Start Jenkins
+
+Goto terminal
+df -h
+sudo mount -o remount,size=5G /tmp
+df -h
+vim /etc/fstab
+i
+tmpfs /tmp tmpfs defaults,noatime,mode=1777,size=5G 0 0
+<Esc> + <:> + <w> + <q> + <Enter>
+df -h
+systemctl daemon-reload
+
+Goto Instances
+Reboot Instances
+Copy IPV4 address
+Paste it in address bar along with the port number
+Sign in to Jenkins
+
+Open GitHub
+Create a new repo
+Go inside the repo
+Goto settings
+Click on webhooks
+Click on add webhooks
+
+Goto Jenkins
+Copy the IPV4 address and port number
+Come back to GitHub
+Paste the link in the Payload URL
+After pasting without and space write : "/github-webhook/"
+Content type = Application json
+Go to Jenkins
+Click on Profile icon
+Click on secuirity
+Click add new token
+Give a token name
+Click generate
+Copy the code
+Click done
+Apply and save
+Go back to GitHub
+Paste the copied code in the Secret section
+Click on add webhook
+Refresh the page
+Green tick appears, connection done
+
+Goto Jenkins
+Click on Jenkins
+Click on new item
+Give a name
+Select Freestyle Project
+Click on OK
+Goto source Code Management
+Select git
+Open GitHub
+Goto the connected Repo
+Under Code<>
+Copy the HTTPS link
+Paste it in the Repository URL in Jenkins
+See the branch type from the Repository in GitHub
+Change the branch type if required in Jenkins
+Click apply and save
+Click on build now
+
+After completion of the build
+Click on the build at the bottom of the page
+Click on the arrow
+Click on Console output
+Scroll down to see output as SUCCESS
+
+jf
