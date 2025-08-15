@@ -1,0 +1,95 @@
+open aws ec2
+search for vpc
+click on create vpc
+vpc only
+give name
+cidr=10.0.0.0/16
+create vpc
+
+click on internet gateway
+create new gateway
+give name
+click on create
+
+go back to internet gateway
+click on actions
+attach to vpc
+select vpc name
+click ok done
+
+two subnets will be created; one will be public while the other one will be private
+
+click on subnet
+select vpc created
+put ipv4 as 10.0.0.0/24
+click create subnet
+two different zone
+one is public the other one is public; give name as such
+
+select the correct vpc by name
+ipv4 cidr = 10.0.0.0/16
+ipv4 subnet = 10.0.1.0/24
+click create subnet
+
+goto route table
+create two route table : one for public the other for private
+give appropiate name
+select vpc
+create route table
+
+for the public one:
+  edit route
+  add route
+  add 0.0.0.0/0
+  add gateway : internet gateway
+  igw select full name
+  save changes
+
+goto ec2
+launch two instances with the same secuirity group and key; but different region ; two instances : one public, the other one private
+in the public instance 
+  choose auto assign public ip = enable
+  fot the private one = disable
+create instance
+8gb and gp2
+launch instance
+
+first connect the enabled instance in the terminal
+goto downloads
+open the key file in notepad
+copy its content
+vim <paste the name along with the extension of the file>
+inside the file paste the copied contents of the key file in downloads
+esc : w q ! enter
+
+chmod 400 <key name along with extension>
+goto ec2
+search for vpc
+click nat gateway
+click create nat gateway
+give a name
+select the subnet by name (public)
+click on allocate elastic IP
+click on create nat gateway
+
+goto route tables
+select the route
+click on route table id
+edit route tables
+add route
+0.0.0.0/0
+beside the all zero select : nat gateway
+save chnages
+
+in the first instance (public)
+goto secuirity group
+select inbound rules
+(the previous set rules already appear)
+
+goto the private instance
+copy the PRIVATE IPV4 address
+paste it in the terminal
+
+
+
+ping google.com
