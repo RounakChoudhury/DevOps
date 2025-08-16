@@ -21,7 +21,9 @@ click on attach internet gateway
 two subnets will be created; one will be public while the other one will be private
 
 click on subnet
+create key
 select vpc created
+give vpc name
 put ipv4 as 10.0.0.0/24
 click create subnet
 two different zone
@@ -29,7 +31,8 @@ one is public the other one is public; give name as such
 
 select the correct vpc by name
 ipv4 cidr = 10.0.0.0/16
-ipv4 subnet = 10.0.1.0/24
+ipv4 subnet cidr = 10.0.0.0/24 (public)
+ipv4 subnet cidr = 10.0.1.0/24 (private)
 click create subnet
 
 goto route table
@@ -45,6 +48,9 @@ for the public one:
   add gateway : internet gateway
   igw select full name
   save changes
+
+to differentiate between the public and private route table, 
+select the route table -> subnet association -> edit subnet association -> select the correct association according to public and private -> save changes
 
 goto ec2
 launch two instances with the same secuirity group and key; but different region ; two instances : one public, the other one private
