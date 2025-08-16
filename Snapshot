@@ -27,7 +27,7 @@ select instance created
 attach volume
 
 df-h
-mount /dev/<name>...................WHAT NAME???
+mount /dev/<name>...................name from lsblk first like copy
 mount /dev/<name> /<filename>
 mount /dev/<name>
 
