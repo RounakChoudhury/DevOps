@@ -61,15 +61,26 @@ create instance
 8gb and gp2
 launch instance
 
-first connect the enabled instance in the terminal
-goto downloads
-open the key file in notepad
-copy its content
-vim <paste the name along with the extension of the file>
-inside the file paste the copied contents of the key file in downloads
-esc : w q ! enter
+first connect the enabled instance in the terminal (public  and private in the same terminal)
 
-chmod 400 <key name along with extension>
+//{goto downloads
+//open the key file in notepad
+//copy its content entire  evrything
+//vim <paste the name along with the extension of the file>
+//inside the file paste the copied contents of the key file in downloads
+//esc : w q ! enter
+//chmod 400 <key name along with extension> ###############} dont do
+
+after connecting the two indtance in same terminal output comes permission denied (ans)
+
+
+
+
+
+
+
+
+
 goto ec2
 search for vpc
 click nat gateway
