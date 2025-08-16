@@ -1,3 +1,7 @@
+i have a web server in mumbai india region where my website is running. i need same server in singapore region. migrate this webserver from mumbai to singapore
+
+
+
 Create an instance
 gp2 and 8gb
 Connect in Terminal
@@ -43,3 +47,4 @@ cat > index.html
 Control C to exit the file
 
 Ami3
+
