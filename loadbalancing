@@ -10,15 +10,17 @@ systemctl start httpd
 systemctl enable httpd
 systemctl status httpd
 cd /var/www/html/
-cat rnk1.html (in different terminal different name: rnk1, rnk2...)
+cat rnk1.html same name
 (Write anything inside the file that denotes that they are all different files)
 Control c to exit the files
 
 Goto Instances
 Secuirity Groups
+edit inbound rules
 Inbound rules
 Add rules
 Port = 80
+cidr all zero
 HTTP
 
 Go back to instances
@@ -37,18 +39,25 @@ Give a name
 Internet facing
 IPV4
 Choose all the availability zones
-Choose the same security group
+Choose the same security group along with defaults
+under default action select target group with name
+click create load balance
 Create target group
-Give name
+Give name (no other changes)
 Choose the instances
+click on include as pending below
+create target group
 IPV4
 HTTP
 Click next
 Select all
 Create target group
 Click continue
-Select all
-Register target
-Include as pending below
+//Select all
+//Register target
+//Include as pending below
+
+after all open the load balacer and copy the dns name and paste in address bar
 
 lb7
+
