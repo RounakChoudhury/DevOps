@@ -1,0 +1,38 @@
+create instance in normal way and connect
+
+sudo yum update
+sudo yum install automake fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+ll
+cd s3fs-fuse
+./autogen.sh
+./configure --prefix=/usr --with-openssl
+make
+sudo make install
+verify pkg
+which s3fs
+
+touch /etc/passwd-s3fs
+vim /etc/passwd-s3fs
+
+goto ec2
+search iam
+goto users
+create user
+give name
+goto next
+attach policy
+s3 full access
+create user
+click on username
+create access key
+choose cli
+copy the access key
+
+sudo chmod 640 /etc/passwd-s3fd
+df -h
+mkdir /rnk
+s3fs Chy /rnk -o passwd_file_file=/etc/passwd-s3fd
+cd /rnk/
+touch test.txt{1..10}
+cat /etc/passwd-s3fs
