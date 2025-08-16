@@ -12,10 +12,11 @@ give name
 click on create
 
 go back to internet gateway
+select the internet gateway created
 click on actions
 attach to vpc
 select vpc name
-click ok done
+click on attach internet gateway
 
 two subnets will be created; one will be public while the other one will be private
 
