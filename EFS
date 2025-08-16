@@ -1,3 +1,8 @@
+we people r working on a common project in same region but my server r in a different zone but i want to configure
+EFS Storage it should be mount on every server
+
+
+
 create three instances in different servers: amazon linux, redhat and ubuntu
 
 connect in terminal 
