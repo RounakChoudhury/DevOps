@@ -1,0 +1,171 @@
+Create three instances:
+	one is named master
+	other two are named worker 1 and 2
+	master is t2 medium 
+	both workers are t2 micro
+	same security group
+	same key
+	same zone
+	inside any one instance edit the security group
+		add inbound rules
+		add the following rules:
+			TCP	6443
+			TCP	2379-2380
+			TCP	10250
+			TCP	10259
+			TCP	10257
+			TCP	10256
+			TCP	30000-32767
+			UDP	30000-32767
+		CIDR = 0.0.0.0/0	
+
+Connect the three instances in the terminal
+
+hostnamectl set-hostname <name>
+bash
+ip a s
+(Copy the ip address)
+vim /etc/hosts
+(paste the three ip address along with their <name>)
+<Esc> + <:> + <w> + <q> + <Enter>
+ping <ip_address>
+
+Do this for all the three terminal and connect the three terminal
+
+Inside the master terminal run:
+
+apt update -y
+apt install containerd -y
+systemctl start containerd
+systemctl enable containerd
+sudo modprobe overlay
+sudo modprobe br_netfilter
+cat > /etc/modules-load.d/kubernetes.conf << EOF
+	br_netfilter
+	ip_vs
+	ip_vs_rr
+	ip_vs_wrr
+	ip_vs_sh
+	overlay
+	EOF
+cat > /etc/sysctl.d/kubernetes.conf << EOF
+	net.ipv4.ip_forward = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
+	net.bridge.bridge-nf-call-iptables = 1
+	EOF
+sysctl --system
+mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+vim /etc/containerd/config.toml
+	
+Inside the file type:
+	<:> + <se nu> + <Enter>
+	Go to the 139 line
+	press i
+	make the false as true
+	<Esc> + <:> + <w> + <q> + <Enter>
+
+systemctl restart containerd
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo systemctl enable --now kubelet
+kubeadm config images pull
+kubeadm init
+
+(copy the token)
+
+Now paste the following commands at one go together:
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/configconfigure Pod Network
+
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/calico.yaml -O
+kubectl apply -f calico.yaml
+
+Now do the two two worker terminals
+
+Inside the Worker terminals run :
+
+apt update -y
+apt install containerd -y
+systemctl start containerd
+systemctl enable containerd
+sudo modprobe overlay
+sudo modprobe br_netfilter
+cat > /etc/modules-load.d/kubernetes.conf << EOF
+	br_netfilter
+	ip_vs
+	ip_vs_rr
+	ip_vs_wrr
+	ip_vs_sh
+	overlay
+	EOF
+cat > /etc/sysctl.d/kubernetes.conf << EOF
+	net.ipv4.ip_forward = 1
+	net.bridge.bridge-nf-call-ip6tables = 1
+	net.bridge.bridge-nf-call-iptables = 1
+	EOF
+sysctl --system
+mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+vim /etc/containerd/config.toml
+	
+Inside the file type:
+	<:> + <se nu> + <Enter>
+	Go to the 139 line
+	press i
+	make the false as true
+	<Esc> + <:> + <w> + <q> + <Enter>
+
+systemctl restart containerd
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo systemctl enable --now kubelet
+
+Now paste the token copied in both the worker terminal
+
+Go back to the master terminal
+
+kubectl get nodes
+
+[Node status should appear ready]
+
+
+
+
+
+
+
+
+
+POD:
+
+Creation:
+
+mkdir /<folder_name>
+cd /<folder_name>
+vim <pod_name>.yaml
+
+Google -> Kubernetes.io -> search -> pod -> scroll -> write the code do not copy with proper indentation 
+
+Inside the vim folder:
+	write the code do not copy with proper indentation
+	<Esc> + <:> + <w> + <q> + <Enter>
+
+kubectl apply -f <pod_name>.yaml
+kubectl get pod
+kubectl describe pod <pod_name>
+kubectl get namespace
+kubectl net ns (shortcut of the previous line)
+
+
+

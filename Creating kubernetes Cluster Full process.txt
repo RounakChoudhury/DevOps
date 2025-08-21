@@ -1,0 +1,85 @@
+Create an instance :
+	ubuntu
+	new secuirity group
+	new key
+ 	10 gb 
+	gp2
+
+Add the following secuirity groups :
+
+connect in terminal 
+	-> normal steps -> sudo su - -> hostnamectl
+
+apt update -y
+
+apt install unzip -y
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+unzip awscliv2.zip
+
+sudo ./aws/install
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+
+curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+
+chmod +x ./kops
+
+sudo mv ./kops /usr/local/bin/
+
+
+Goto AWS:
+Search IAM -> Users -> Create Users -> Give user name -> cHeck the box -> next -> Attach policies directly -> Give full administrator access -> next -> 
+
+Goto roles -> create roles -> use case = EC2 -> S3 Full access + iam full access + Route 53 full access + EC2 full access -> next
+
+Goto Instance -> Click on instance -> actions -> secuirity -> modify iam -> Choose iam role = create the role created -> update 
+
+Goto S3 -> Create bucket -> give bucket name with .in extension -> ACLI enabled -> unmark block all ip address -> bucket versioning = enable -> create bucket
+
+Goto route 53 -> Hosted zones -> give the same name as the s3 bucket -> private hosted zone -> create hosted zone
+
+Goto IAM -> users -> click on the user created -> create access key -> choose command line interface -> next -> create access key -> download the .csv file OR copy and paste the keys directly into the terminal
+
+
+Goto terminal
+ 
+aws configure 
+	-> give access key
+	-> give prvate key
+	-> zone = us-east-1
+	-> table
+
+
+aws s3 mb s3://dev.k8s.<give the name given>.in
+
+aws s3 ls
+
+export KOPS_STATE_STORE=s3://dev.k8s.<give name given>.in
+
+kops create cluster --cloud=aws --zones=ap-us-east-1 --name=dev.k8s.<give the name given>.in --dns-zone=<give the name given>.in --dns private
+
+kops update cluster dev.k8s.<give the name given>.in --yes --admin
+
+kops validate cluster
+
+kops validate cluster --wait 10m (will be given by the terminal as the last line of the last executed command)
+
+<press ctrl c>
+
+kubectl get nodes
+
+
+[output will show that status =ready
+then go back to ec2 and in the running instance and then there it will show two new running instance by the name that you have given. 
+That is also another output]
+
+
+
+
+

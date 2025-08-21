@@ -1,0 +1,148 @@
+Docker: Installation and setup
+
+yum install docker
+yum repolist all
+yum install docker* -y
+rpmquerry docker (dosent work gives error)
+rpm -q docker
+systemctl start docker
+systemctl enable docker
+docker info
+docker ps
+docker ps -a
+docker image ls
+docker pull ubuntu:rolling
+docker image ls
+
+docker --help
+
+
+
+Creating and running a docker container:
+
+docker run -it --name <container_name> ubuntu:rolling /bin/bash
+
+
+
+
+Installing and starting apache inside a container:
+
+cat /etc/os-release
+ls
+apt update -y
+apt install apache2 -y
+service apache2 start
+
+
+Tasks inside a container:
+
+cd /var/www/html
+echo "This is a container (1)!" > index.html
+apt install curl
+curl http://localhost
+mkdir /data
+cd /data
+touch rnk.txt{1..10}
+ll
+cd
+exit
+
+
+
+
+
+Setting up a connection between two Docker Containers:
+
+
+1 After installing ubuntu:rolling
+2 Create a network : docker network create <network_name>
+3 Duplicate the session in the terminal
+4 In the two separate terminal:
+	1 Create two different Container with two different name and content
+	2 Install and configure apache inside both the Container
+	3 Connect the two Container to the network created : docker network connect <network_name> <container_name>
+	4 curl http://<container_name> // run this command from the opposite container to the opposite container
+
+
+
+Requirement for the connection:
+	1 Must be on the same network
+	2 Apache must be running inside both the container at the same time
+
+
+
+
+
+
+
+
+
+VOLUMES:
+
+
+Create a volume :
+
+docker volume create <volume_name>
+
+
+
+List volume :
+
+docker volume ls
+
+
+
+Run a container with volume attached:
+
+docker run -it --name <container_name> -v <volume_name>:/var/www/html ubuntu:rolling /bin/bash
+
+
+Installing apache:
+
+apt update -y
+apt install apache2 -y
+
+
+Creating a file:
+
+cd /var/www/html
+echo "this is a volume" > index.html
+cd
+exit
+
+Come to root:
+
+cd /var/lib/docker/volumes/my-vol/_data
+cat index.html 
+
+
+Destroying the Container:
+
+docker kill <container_name>
+docker rm <container_name>
+
+
+Running another Container with the same volume :
+
+docker run -it --name <new_container_name> -v <same_volume_name>:/var/www/html ubuntu:rolling /bin/bash
+
+
+Inside the container run:
+
+
+apt update -y
+apt install apache2 -y
+
+
+Exit the Container: exit
+
+
+Come to root:
+
+cd /var/lib/docker/volumes/my-vol/_data
+cat index.html 
+
+
+[The same file that was created in the container that was deleted is shown thus demonstrating that data is persistent]
+
+
