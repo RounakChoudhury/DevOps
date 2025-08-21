@@ -1,0 +1,52 @@
+After creating the cluster successfully:
+
+
+Creating a Pod :
+
+mkdir /<folder_name>
+cd /<folder_name>
+vim <file_name>.yaml
+
+Google -> Kubernetes.io -> search -> pod -> scroll -> write the code do not copy with proper indentation 
+
+Inside the vim folder:
+	write the code do not copy with proper indentation
+	<Esc> + <:> + <w> + <q> + <Enter>
+
+kubectl apply -f <file_name>.yaml
+kubectl get pod
+kubectl describe pod <file_name>
+kubectl get namespace
+kubectl net ns (shortcut of the previous line)
+
+
+Creating a Namespace :
+
+kubectl create namespace <namespace_name>
+vim <file_name>.yaml
+	(inside give the name of the pod)
+
+kubectl apply -f <file_name>.yaml --namespace=<namespace_name>
+kubectl apply -f <file_name>.yaml
+kubectl get pod
+
+Copying the file to a new one with the same pod :
+
+cp <old_file_name>.yaml <new_file_name>.yaml
+vim <new_file_name>.yaml
+	(inside we see the same pod name given before)
+kubectl apply -f <new_file_name>.yaml --namespace=<namespace_name>
+kubectl get pod -n <namespace_name>
+
+
+
+
+Resource Quota:
+
+vim my-quota.yaml
+	inside do teh size thing
+kubectl apply -f my-quota.yaml
+kubectl get resourcequota
+kubectl describe resourcequota
+
+
