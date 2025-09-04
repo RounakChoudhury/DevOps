@@ -1,0 +1,57 @@
+creating secuirity group in terraform
+
+
+do creating instance with terraform
+
+open sir repo : new_secuirity-group.tf
+
+mkdir /secu
+cd /secu
+vim provider.tf
+
+provider "aws" {
+  region     = "us-east-1" # give region
+  access_key = "<give access key>" 
+  secret_key = "<give secret key>" 
+}
+
+
+resource "aws_security_group" "<give name>" {
+  name        = "<give the same name>"
+  description = "Allow http and ssh inbound traffic and all outbound traffic"
+ 
+  tags = {
+    Name = "<give the same name>"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_http" {
+  security_group_id = aws_security_group.<give the same name>.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+ 
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+  security_group_id = aws_security_group.<give the same name>.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+esc : w q ! enter
+
+terraform init
+terraform validate
+terraform fmt
+terraform plan
+terraform apply
+
+goto ec2
+security group
+new security group appears
+ss of inbound outbound where new security group appears
+
+also in terminal it shows added
