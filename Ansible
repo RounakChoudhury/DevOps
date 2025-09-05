@@ -1,0 +1,70 @@
+Create three instances
+connect them in the terminal
+ping each other
+
+
+on the control node and the workers:
+vim /etc/ssh/sshd_config
+systemctl start sshd
+systemctl enable sshd
+ssh-keygen
+
+copy the key
+goto the worker nodes
+
+cd .ssh
+vim authorized_keys
+
+paste the public key inside
+
+go back to the control node:
+
+yum update -y
+yum install ansible-core* -y
+cd /etc/ansible/
+vim hosts
+[devops]
+worker-1.example.com
+worker-2.example.com
+
+inside add the worker nodes:
+<<<<<..............>>>>>>
+
+ansible all -m ping
+mkdir /project-x
+cd /project-x/
+vim playbook1.yaml
+
+inside add the following yaml file:
+
+---
+- name: doing some task A
+  hosts: all
+  tasks:
+ 
+        - name: creating user jacksparrow
+          user:
+                  name: Riddhi
+                  uid: 1200
+                  home: /Lti-mindtree
+                  shell: /bin/bash
+                  state: present
+ 
+        - name: installed apache on my remote servers
+          yum:
+                name: httpd
+                state: present
+        - name: started apache service
+          systemd:
+                  name: httpd
+                  state: started
+                  enabled: true
+ 
+...
+
+save and exit
+
+ansible-playbook playbook1.yaml --syntax-check
+ansible-playbook playbook1.yaml -C
+ansible-playbook playbook1.yaml
+
