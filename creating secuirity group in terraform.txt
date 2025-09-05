@@ -16,12 +16,12 @@ provider "aws" {
 }
 
 
-resource "aws_security_group" "<give name>" {
-  name        = "<give the same name>"
+resource "aws_security_group" "rnk" {
+  name        = "rnk"
   description = "Allow http and ssh inbound traffic and all outbound traffic"
  
   tags = {
-    Name = "<give the same name>"
+    Name = "rnk"
   }
 }
 
@@ -55,3 +55,4 @@ new security group appears
 ss of inbound outbound where new security group appears
 
 also in terminal it shows added
+
