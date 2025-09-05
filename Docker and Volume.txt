@@ -1,29 +1,22 @@
 Docker: Installation and setup
 
-yum install docker
-yum repolist all
+
 yum install docker* -y
-rpmquerry docker (dosent work gives error)
-rpm -q docker
+
 systemctl start docker
 systemctl enable docker
 docker info
-docker ps
-docker ps -a
-docker image ls
-docker pull ubuntu:rolling
+
+docker pull ubuntu:rolling...........................
 docker image ls
 
-docker --help
+
 
 
 
 Creating and running a docker container:
 
 docker run -it --name <container_name> ubuntu:rolling /bin/bash
-
-
-
 
 Installing and starting apache inside a container:
 
@@ -32,12 +25,15 @@ ls
 apt update -y
 apt install apache2 -y
 service apache2 start
-
+docker ps -a
 
 Tasks inside a container:
 
 cd /var/www/html
 echo "This is a container (1)!" > index.html
+
+
+
 apt install curl
 curl http://localhost
 mkdir /data
@@ -144,5 +140,6 @@ cat index.html
 
 
 [The same file that was created in the container that was deleted is shown thus demonstrating that data is persistent]
+
 
 
