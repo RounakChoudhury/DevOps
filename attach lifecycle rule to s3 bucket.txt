@@ -1,0 +1,11 @@
+open n.v bucket created
+click on the bucket
+click on management
+create lifecycle rule
+give a name
+choose -> apply to all objects in the bucket
+acknowledge
+under lifecycle rule actions
+choose -> transition current versions of objects between storage classes
+acknowledge
+click on create rule

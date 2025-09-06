@@ -1,0 +1,19 @@
+Create a s3 bucket in N.Virginia
+upload a file in the bucket
+
+duplicate the page and open s3 in the ohio region
+create a bucket in ohio
+
+open the n.v bucket 
+goto management
+create replication rule
+give name
+source bucket -> apply to all object in the bucket
+under destination
+choose -> choose a bucket in this account
+click on browse s3
+choose the bucket
+save
+
+goto ohio
+the uploaded file in the n.v region appears
